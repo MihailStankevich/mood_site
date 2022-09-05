@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Mood Site | Home</title>
+    {% endblock %}
+  {% block content %}  
+
+
+<div class = 'container' style="margin-top: 2.5rem;">
+  <div class = 'row'><h3>Popular songs</h3></div>
+     <div class = 'row'>
+        {% for song in recomendation %}
+        <div class="card m-4 col-6 col-sm-4 col-md-4 col-lg-3 col-xl-2" style="width: 18rem; border: 0px;">
+           <img src="{{song.track.album.images.0.url}}" class="card-img-top" alt="...">
+           <div class="card-body">
+           <h5 class="card-title">{{song.track.name}}</h5>
+           <p class="card-title">By {{song.track.artists.0.name}}</p>
+           <a href="{{song.track.uri}}" class="btn btn-outline-success">Play song</a>
+           </div>
+        </div>
+        {%endfor%}
+     </div>
+  </div>
+ </div>
+<strong></strong>
+
+  <div class="container" style="margin-top: 2.5rem;">
+    <div class = 'row'><h3 class="card-title" style="color: #000;">Quote of the moment</h3></div>
+    <div class="card text-bg-dark ">
+      <img src="https://i.artfile.ru/1920x1080_767113_[www.ArtFile.ru].jpg" class="card-img" alt="..." style="height:200px; filter: brightness(70%);">
+      <div class="card-img-overlay d-flex justify-content-center">
+        <h4 class="card-text m-5" style="color: #fff;">{{quotes}}</h2>
+      </div>
+    </div>
+</div>
+
+<div class = 'container' style="margin-top: 2.5rem;">
+  <div class = 'row'><h3>Recommended Books</h3></div>
+  <div class = 'row'>
+    {% for book in recommended_books %}
+    <div class = 'col-6 col-sm-4 col-md-4 col-lg-3 col-xl-2 m-2'>
+      <a href = "{% url 'book_detail' book.slug %}">
+        <div>
+          <div class="uk-card uk-card-default uk-card-body"> 
+              <img src = "{{book.cover_image.url}}">
+          </div>
+        </div>
+    </a>
+    </div>
+    {% endfor %}
+  </div>
+  <div class = 'row'><a class="btn btn-success"  href="{% url 'all_books' %}" role="button">See all</a></div>
+</div>
+
+<div class = 'container' style="margin-top: 2.5rem;">
+  <div class = 'row'><h3>Popular Movies</h3></div>
+  <div class = 'row'>
+  {% for movie in movie_data %}
+    <div class="card m-3" style="width: 18rem;">
+      <img src="https://image.tmdb.org/t/p/original/{{movie.poster_path}}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{movie.title}}</h5>
+        <p>
+          <a class="btn btn-outline-success" data-bs-toggle="collapse" href="#collapseExample{{movie.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Read description
+          </a>
+        </p>
+        <div class="collapse" id="collapseExample{{movie.id}}">
+            <p class="card-text">{{movie.overview}}</p>
+        </div>
+        
+      </div>
+    </div>
+  {% endfor %}
+  </div>
+  <div class = 'row'><a class="btn btn-success"  href="{% url 'movies' %}" role="button">See all</a></div>
+</div>
+
+
+<!-- <div class = 'container'>
+  <div class = 'row'><h4>Top Fiction Books</h4></div>
+  <div class = 'row'>
+    {% for book in fiction_books %}
+    <div class = 'col-6 col-sm-4 col-md-4 col-lg-3 col-xl-2'>
+      <a href = "">
+        <div>
+          <div class="uk-card uk-card-default uk-card-body"> 
+             <img src = "{{book.cover_image.url}}">
+          </div>
+      </div>
+    </a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+<div class = 'container'>
+    <div class = 'row'><h4>Top Business Books</h4></div>
+    <div class = 'row'>
+        {% for book in business_books %}
+      <div class = 'col-6 col-sm-4 col-md-4 col-lg-3 col-xl-2'>
+        <a href = "">
+          <div>
+            <div class="uk-card uk-card-default uk-card-body"> 
+               <img src = "{{book.cover_image.url}}">
+            </div>
+        </div>
+      </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div> -->
+
+
+
+{% endblock %}

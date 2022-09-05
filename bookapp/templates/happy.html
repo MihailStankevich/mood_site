@@ -1,0 +1,68 @@
+
+     {% extends 'base.html' %}
+     {% block title %}
+     <title>Mood Site | All Books</title>
+     {% endblock %}
+ 
+   
+     {% block content %}
+     <div class = 'container'>
+      <div class = 'row'><h3>Recommended movies</h3></div>
+        <div class = 'row'>
+        {% for movie in movie_data %}
+          <div class="card m-3" style="width: 18rem;">
+            <img src="https://image.tmdb.org/t/p/original/{{movie.poster_path}}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{movie.title}}</h5>
+              <p>
+                <a class="btn btn-outline-success" data-bs-toggle="collapse" href="#collapseExample{{movie.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                  Read description
+                </a>
+              </p>
+              <div class="collapse" id="collapseExample{{movie.id}}">
+                  <p class="card-text">{{movie.overview}}</p>
+              </div>
+              
+            </div>
+          </div>
+        {% endfor %}
+        </div>
+      </div>
+
+    
+      <div class = 'container'>
+        <div class = 'row'><h3>Recommended playlists</h3></div>
+           <div class = 'row'>
+              {% for playl in playlist %}
+              <div class="card m-4 col-6 col-sm-4 col-md-4 col-lg-3 col-xl-2" style="width: 18rem; border: 0px;">
+                 <img src="{{playl.data.images.items.0.sources.0.url}}" class="card-img-top" alt="...">
+                 <div class="card-body">
+                 <h5 class="card-title">{{playl.data.name}}</h5>
+                 <a href="{{playl.data.uri}}" class="btn btn-outline-success">Play playlist</a>
+                 </div>
+              </div>
+              {%endfor%}
+           </div>
+        </div>
+
+        <div class = 'container'>
+          <div class = 'row'><h4>Recommended Books</h4></div>
+          <div class = 'row'>
+            {% for book in business_books %}
+            <div class = 'col-6 col-sm-4 col-md-4 col-lg-3 col-xl-2 m-3'>
+              <a href = "{% url 'book_detail' book.slug %}">
+                <div>
+                  <div class="uk-card uk-card-default uk-card-body"> 
+                    <img src = "{{book.cover_image.url}}">
+                  </div>
+              </div>
+            </a>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+ {% endblock %}
+ 
+ 
+ 
+ 
